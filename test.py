@@ -28,8 +28,15 @@ def addNotes(midi):
             duration: the duration of the note (in beats) [Float].
             volume: the volume (velocity) of the note. [Integer, 0-127].
     """
+    # track, channel, pitch, time, duration, volume
     for x in xrange(1,100):
-        midi.addNote(0, 0, 60+(x%10), x, 5, 100)
+        channel = 0
+        pitch = (1000/(10+(x*x)))%127
+        time = x
+        duration = 2
+        volume = 100
+
+        midi.addNote(0, channel, pitch, time, duration, volume)
 
 def main():
     myMidi = MIDIFile(2)
