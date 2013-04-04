@@ -1,6 +1,7 @@
 import csv
 
 def main():
+    # from http://nssdc.gsfc.nasa.gov/planetary/factsheet/
     r = csv.reader(open('./planet-data.csv'))
 
     planets = r.next()
