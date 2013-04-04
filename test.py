@@ -1,6 +1,9 @@
 #!/usr/bin/python
+import math
 
 from midiutil.MidiFile import MIDIFile
+
+import get_data
 
 # See http://www.tonalsoft.com/pub/news/pitch-bend.aspx
 # To play on Linux: install timidity package and just execute:
@@ -29,11 +32,20 @@ def addNotes(midi):
             volume: the volume (velocity) of the note. [Integer, 0-127].
     """
     # track, channel, pitch, time, duration, volume
-    for x in xrange(1,100):
+    for i, x in enumerate(get_data.main()):
+        try:
+            x = int(x)
+        except (TypeError, ValueError):
+            continue
+        print type(x)
+        d = int(math.log(abs(x)+1))+1
+        x = int(x)
+        x = x % 100
         channel = 0
-        pitch = (1000/(10+(x*x)))%127
-        time = x
-        duration = 2
+        pitch = x #(1000/(10+(x*x)))%127
+        print x
+        time = i/d
+        duration = x%5
         volume = 100
 
         midi.addNote(0, channel, pitch, time, duration, volume)
