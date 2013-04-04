@@ -38,14 +38,15 @@ def addNotes(midi):
         except (TypeError, ValueError):
             continue
         print type(x)
-        d = int(math.log(abs(x)+1))+1
+        d = int(math.log(abs(x)+1))+5
         x = int(x)
         x = x % 100
         channel = 0
-        pitch = x #(1000/(10+(x*x)))%127
+        # x = (1000/(10+(x*x)))%127
+        pitch = x
         print x
         time = i/d
-        duration = x%5
+        duration = (x%4)+1
         volume = 100
 
         midi.addNote(0, channel, pitch, time, duration, volume)
